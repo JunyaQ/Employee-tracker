@@ -1,4 +1,4 @@
-CREATE DATABASE employeeTracker;
+CREATE DATABASE hi;
 
 CREATE TABLE employee(
     id INT NOT NULL AUTO_INCREMENT ,

@@ -1,4 +1,33 @@
 const inquirer = require("inquirer");
+const express = require("express");
+// Import and require mysql2
+const mysql = require('mysql2');
+const PORT = process.env.PORT || 3001;
+
+const app = express();
+// Express middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// Connect to database
+const db = mysql.createConnection(
+  {
+    host: 'localhost',
+    // MySQL username,
+    user: 'root',
+    // {TODO: Add your MySQL password}
+    password: 'junyaQ',
+    database: 'employeeTracker',
+  },
+  console.log(`Connected to the database.`)
+);
+db.connect(() => {
+    // Start start questions
+    console.log("start with startquestions");
+    startquestions();
+});
+
+
 
 const startquestions=()=> {
     // name, id, email, office
@@ -48,6 +77,25 @@ function viewallroles(){
     console.log("view all roles");
 }
 function adddepartment(){
+    function addDept(){
+
+    inquirer.prompt({
+
+            // Prompt user for name of department
+            name: "deptName",
+            type: "input",
+            message: "Department Name: "
+        }).then((answer) => {
+                
+            // add department to the table
+            connection.query(`INSERT INTO department (name)VALUES ("${answer.deptName}");`, (err, res) => {
+                if(err) return err;
+                console.log("\n DEPARTMENT ADDED...\n ");
+                mainMenu();
+            });
+
+        });
+}
     console.log("add a department");
 }
 function addrole(){
@@ -60,4 +108,8 @@ function updateemployeerole(){
     console.log("update an employee role");
 }
 
-startquestions();
+
+
+app.use((req, res) => {
+  res.status(404).end();
+});
