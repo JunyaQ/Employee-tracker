@@ -17,25 +17,47 @@ const startquestions=()=> {
     },
 
 ])
+// based on option from the main menu
 .then(startanswer=>{
  if(startanswer.menu == "view all departments"){
-     console.log("view all departments");
+     viewalldepartments();
  }
  else if(startanswer.menu == "view all roles"){
-     console.log("view all roles");
+     viewallroles();
  }
  else if(startanswer.menu == "add a department"){
-     console.log("add a department");
+    adddepartment();
  }
  else if(startanswer.menu == "add a role"){
-     console.log("add a role");
+     addrole();
  }
  else if(startanswer.menu =="add an employee"){
-     console.log("add an employee");
+    addemployee();
  }
  else if(startanswer.menu =="updagte an employee role"){
-     console.log("update an employee role");
+     updateemployeerole();
  }
+    
 })
 }
+
+function viewalldepartments(){
+    console.log("view all departments");
+}
+function viewallroles(){
+    console.log("view all roles");
+}
+function adddepartment(){
+    console.log("add a department");
+}
+function addrole(){
+    console.log("add a role");
+}
+function addemployee(){
+    console.log("add an employee");
+}
+function updateemployeerole(){
+    console.log("update an employee role");
+}
+
 startquestions();
