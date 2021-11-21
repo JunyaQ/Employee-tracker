@@ -3,6 +3,7 @@
     // Import and require mysql2
     const mysql = require('mysql2');
     const { exit } = require("process");
+const e = require("express");
     const PORT = process.env.PORT || 3001;
 
     const app = express();
@@ -46,8 +47,16 @@
             "add a role",
             "add an employee",
             "update an employee role",
+            /*bonus function */
+            "update employee mnanagers",//
+            "view employees by manager",
+            "view employees by department",
+            "delete department",
+            "delete roles",
+            "delete employees",
+            "view salary in one department",
+            /* */
             "Exit"]
-        
         },
 
     ])
@@ -73,6 +82,9 @@
     }
     else if(startanswer.menu =="updagte an employee role"){
         updateemployeerole();
+    }
+    else if (startanswer.menu == "update employee mnanagers"){
+        updateemployeemanager();
     }
     else if(startanswer.menu == "Exit"){
         console.log("Thank you for using employee tracker system");
@@ -226,6 +238,36 @@
               startquestions();
             })
           });
+        }
+        function updateemployeemanager(){
+            console.log("update employee manager");
+            inquirer
+        .prompt([
+          {
+            type: "input",
+            message: "Enter the employee's ID you want to be updated",
+            name: "id"
+          },
+          {
+            type: "input",
+            message: "Enter the new manager for that employee",
+            name: "manager_id"
+          }
+        ])
+        .then(function(res){
+            db.query(`UPDATE employee SET manager_id="${res.manager_id}"WHERE id="${res.id}"`,function(err,res){
+                if(err){
+                    throw err;
+                }
+                console.table(res);
+                console.table(res);
+                console.log("-----------------------");
+                viewallemployees();
+                startquestions();
+            })
+        })
+
+
         }
 
 
