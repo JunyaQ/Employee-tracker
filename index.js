@@ -21,6 +21,8 @@ const db = mysql.createConnection(
   },
   console.log(`Connected to the database.`)
 );
+
+
 db.connect(() => {
     // Start start questions
     console.log("start with startquestions");
@@ -38,6 +40,7 @@ const startquestions=()=> {
         message:"Please choose one of the options below: ",
         choices: ["view all departments",
         "view all roles",
+        "view all employees",
         "add a department",
         "add a role",
         "add an employee",
@@ -53,6 +56,9 @@ const startquestions=()=> {
  }
  else if(startanswer.menu == "view all roles"){
      viewallroles();
+ }
+ else if (startanswer.menu=="view all employees"){
+     viewallemployees();
  }
  else if(startanswer.menu == "add a department"){
     adddepartment();
@@ -76,26 +82,19 @@ function viewalldepartments(){
 function viewallroles(){
     console.log("view all roles");
 }
-function adddepartment(){
-    function addDept(){
-
-    inquirer.prompt({
-
-            // Prompt user for name of department
-            name: "deptName",
-            type: "input",
-            message: "Department Name: "
-        }).then((answer) => {
-                
-            // add department to the table
-            connection.query(`INSERT INTO department (name)VALUES ("${answer.deptName}");`, (err, res) => {
-                if(err) return err;
-                console.log("\n DEPARTMENT ADDED...\n ");
-                mainMenu();
-            });
-
-        });
+function viewallemployees(){
+    const query = "SELECT * FROM employee";
+    db.query(query, function(err, res) {
+      if (err) throw err;
+      console.table(res);
+      startquestions();
+    });
+      console.log("view all employees");
+   
 }
+
+function adddepartment(){
+
     console.log("add a department");
 }
 function addrole(){
