@@ -9,6 +9,6 @@ VALUES
 (1111, "web programming");
 
 
-INSERT INTO arole(id, title, department_id)
+INSERT INTO arole(id, title, salary, department_id)
 VALUES
-(12345, "junior worker", 1111);
+(12345, "junior worker",20000.00, 1111);

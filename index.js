@@ -125,6 +125,8 @@
             db.query(`INSERT INTO department (id,department_name) VALUES("${res.id}","${res.department}")`,function(err,res){
                 if(err) throw err;
                 console.table(res);
+                console.log("-----------------------");
+                viewalldepartments();
                 startquestions();
             })
         })
@@ -152,6 +154,8 @@
         db.query(`INSERT INTO arole(id, title, department_id)VALUES("${res.id}","${res.title}","${res.department_id}")`,function(err,res){
             if(err) throw err;
             console.log(res);
+            console.log("-----------------------");
+            viewallroles();
             startquestions();
         })
     })
@@ -190,13 +194,40 @@
         db.query(`INSERT INTO employee(id, first_name, last_name, role_id, manager_id)VALUES("${res.id}","${res.first_name}","${res.last_name}","${res.role_id}","${res.manager_id}")`,function(err,res){
             if(err) throw err;
             console.log(res);
+            console.log("-----------------------");
+            viewallemployees();
             startquestions();
         })
     })
     }
     function updateemployeerole(){
         console.log("update an employee role");
-    }
+        inquirer
+        .prompt([
+          {
+            type: "input",
+            message: "Enter the employee's ID you want to be updated",
+            name: "id"
+          },
+          {
+            type: "input",
+            message: "Enter the new role ID for that employee",
+            name: "role_id"
+          }
+        ])
+        .then(function (res) {
+            db.query(`UPDATE employee SET role_id="${res.role_id}"WHERE id="${res.id}"`, function (err, res) {
+              if (err) {
+                throw err;
+              }
+              console.table(res);
+              console.log("-----------------------");
+              viewallemployees();
+              startquestions();
+            })
+          });
+        }
+
 
 
 

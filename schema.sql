@@ -8,7 +8,9 @@ CREATE TABLE employee(
     last_name VARCHAR(30),
     role_id INT,
     manager_id INT,
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    FOREIGN KEY (role_id) REFERENCES arole(id),
+    FOREIGN KEY (manager_id) REFERENCES employee(id),
 );
 
 CREATE TABLE department(
@@ -20,7 +22,9 @@ CREATE TABLE department(
 CREATE TABLE arole(
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(30),
+    salary DECIMAL,
     department_id INT,
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    FOREIGN KEY (department_id) REFERENCES department(id) 
 );
 
