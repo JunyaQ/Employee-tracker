@@ -1,4 +1,4 @@
-# challenge-12-employee-tracker
+# Employee-tracker
 ## Information about this application: 
 WHEN start the application<br/>
 THEN it start with the database shown in  the seed.sql file<br/>
